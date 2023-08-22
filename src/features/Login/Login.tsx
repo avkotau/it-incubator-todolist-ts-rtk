@@ -6,11 +6,12 @@ import { Navigate } from 'react-router-dom'
 import { useAppDispatch } from 'hooks/useAppDispatch';
 import { Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, TextField } from '@mui/material'
 import { selectIsLoggedIn } from "app/app.selectors";
+import { useAppSelector } from "app/store";
 
 export const Login = () => {
     const dispatch = useAppDispatch()
 
-    const isLoggedIn = useSelector(selectIsLoggedIn);
+    const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
     const formik = useFormik({
         validate: (values) => {

@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 import { Menu } from '@mui/icons-material'
 import { selectIsInitialized, selectIsLoggedIn, selectStatus } from "app/app.selectors";
-import { AppDispatch } from "app/store";
+import { AppDispatch, useAppSelector } from "app/store";
 
 type PropsType = {
 	demo?: boolean
@@ -27,9 +27,9 @@ type PropsType = {
 
 function App({demo = false}: PropsType) {
 
-	const status = useSelector(selectStatus)
-	const isInitialized = useSelector(selectIsInitialized)
-	const isLoggedIn = useSelector(selectIsLoggedIn)
+	const status = useAppSelector(selectStatus)
+	const isInitialized = useAppSelector(selectIsInitialized)
+	const isLoggedIn = useAppSelector(selectIsLoggedIn)
 
 	const dispatch = useDispatch<AppDispatch>()
 

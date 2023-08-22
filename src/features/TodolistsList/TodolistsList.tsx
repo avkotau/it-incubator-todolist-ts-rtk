@@ -17,15 +17,16 @@ import { Navigate } from "react-router-dom";
 import { useAppDispatch } from "hooks/useAppDispatch";
 import { selectIsLoggedIn } from "app/app.selectors";
 import { selectTasksts, selectTodolists } from "features/TodolistsList/Todolist/todolistsList.selectors";
+import { useAppSelector } from "app/store";
 
 type PropsType = {
   demo?: boolean
 }
 
 export const TodolistsList: React.FC<PropsType> = ({ demo = false }) => {
-  const todolists = useSelector(selectTodolists);
-  const tasks = useSelector(selectTasksts);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const todolists = useAppSelector(selectTodolists);
+  const tasks = useAppSelector(selectTasksts);
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   const dispatch = useAppDispatch();
 
