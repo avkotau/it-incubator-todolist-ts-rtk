@@ -8,7 +8,7 @@ const slice = createSlice({
   initialState: {
     status: "idle" as RequestStatusType,
     error: null as string | null,
-    isInitialized: false
+    isInitialized: false,
   },
 
   reducers: {
@@ -20,35 +20,33 @@ const slice = createSlice({
     },
     setAppInitializedAC: (state, action: PayloadAction<{ value: boolean }>) => {
       state.isInitialized = action.payload.value;
-    }
-  }
+    },
+  },
 });
-
 
 export const appReducer = slice.reducer;
 export const { setAppErrorAC, setAppInitializedAC, setAppStatusAC } = slice.actions;
 
-export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed"
+export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed";
 export type InitialStateType = {
   // происходит ли сейчас взаимодействие с сервером
-  status: RequestStatusType
+  status: RequestStatusType;
   // если ошибка какая-то глобальная произойдёт - мы запишем текст ошибки сюда
-  error: string | null
+  error: string | null;
   // true когда приложение проинициализировалось (проверили юзера, настройки получили и т.д.)
-  isInitialized: boolean
-}
+  isInitialized: boolean;
+};
 
 export const initializeAppTC = () => (dispatch: Dispatch) => {
-  authAPI.me().then(res => {
+  authAPI.me().then((res) => {
     if (res.data.resultCode === 0) {
       dispatch(setIsLoggedInAC({ isLoggedIn: true }));
     } else {
-
     }
 
     dispatch(setAppInitializedAC({ value: true }));
   });
 };
 
-export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
-export type SetAppStatusActionType = ReturnType<typeof setAppStatusAC>
+export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>;
+export type SetAppStatusActionType = ReturnType<typeof setAppStatusAC>;

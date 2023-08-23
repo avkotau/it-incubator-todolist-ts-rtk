@@ -8,14 +8,14 @@ import { clearDataAC } from "features/TodolistsList/todolists-reducer";
 const slice = createSlice({
   name: "auth",
   initialState: {
-    isLoggedIn: false
+    isLoggedIn: false,
   },
 
   reducers: {
     setIsLoggedInAC: (state, action: PayloadAction<{ isLoggedIn: boolean }>) => {
       state.isLoggedIn = action.payload.isLoggedIn; //deleted action.payload;
-    }
-  }
+    },
+  },
 });
 
 export const authReducer = slice.reducer;
@@ -23,8 +23,9 @@ export const { setIsLoggedInAC } = slice.actions;
 // thunks
 export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
   dispatch(setAppStatusAC({ status: "loading" }));
-  authAPI.login(data)
-    .then(res => {
+  authAPI
+    .login(data)
+    .then((res) => {
       if (res.data.resultCode === 0) {
         dispatch(setIsLoggedInAC({ isLoggedIn: true }));
         dispatch(setAppStatusAC({ status: "succeeded" }));
@@ -38,12 +39,13 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch) => {
 };
 export const logoutTC = () => (dispatch: Dispatch) => {
   dispatch(setAppStatusAC({ status: "loading" }));
-  authAPI.logout()
-    .then(res => {
+  authAPI
+    .logout()
+    .then((res) => {
       if (res.data.resultCode === 0) {
         dispatch(setIsLoggedInAC({ isLoggedIn: false }));
         dispatch(setAppStatusAC({ status: "succeeded" }));
-        dispatch(clearDataAC())
+        dispatch(clearDataAC());
       } else {
         handleServerAppError(res.data, dispatch);
       }
